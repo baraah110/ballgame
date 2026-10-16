@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://cp3265tdjb8qc"]
+
+[ext_resource type="Script" uid="uid://bwudpcxpxrb43" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://c486s0h4el432" path="res://ball.gd" id="2_h2yge"]
+
+[sub_resource type="Environment" id="Environment_s7wsd"]
+background_mode = 1
+background_color = Color(0.043137256, 0.0627451, 0.14901961, 1)
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0cvp5"]
+albedo_color = Color(0.92941177, 0.43529412, 0.39607844, 1)
+emission_enabled = true
+emission_energy_multiplier = 0.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_s7rlf"]
+material = SubResource("StandardMaterial3D_0cvp5")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_utshk"]
+
+[node name="Main" type="Node3D" unique_id=1669228411]
+script = ExtResource("1_0xm2m")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1926416413]
+environment = SubResource("Environment_s7wsd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=434903522]
+transform = Transform3D(0.8660254, -0.38302222, 0.32139382, 0, 0.64278764, 0.76604444, -0.5, -0.66341394, 0.5566704, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1432849805]
+keep_aspect = 0
+fov = 70.0
+
+[node name="Ball" type="RigidBody3D" parent="." unique_id=702168564]
+continuous_cd = true
+script = ExtResource("2_h2yge")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball" unique_id=1383147719]
+mesh = SubResource("SphereMesh_s7rlf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball" unique_id=1123017011]
+shape = SubResource("SphereShape3D_utshk")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Ball" unique_id=1584985363]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+light_color = Color(0, 0.834872, 0.8386192, 1)
+light_energy = 1.5
+omni_range = 6.0
+
+[node name="Level" type="Node3D" parent="." unique_id=1083401692]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1274719875]
+
+[node name="Label" type="Label" parent="UI" unique_id=877536265]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 56.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "hello"
+horizontal_alignment = 1
